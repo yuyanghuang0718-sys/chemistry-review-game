@@ -56,7 +56,8 @@ export default function MaterialAnalysisGame() {
   const [flipped, setFlipped] = useState(false);
 
   useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}data/materials.json`)
+    const materialsUrl = `${import.meta.env.BASE_URL}data/materials.json?v=lecture-v2`;
+    fetch(materialsUrl, { cache: "no-store" })
       .then(response => {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         return response.json();
