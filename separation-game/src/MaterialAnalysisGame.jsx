@@ -205,7 +205,7 @@ export default function MaterialAnalysisGame() {
         <div className={`material-card ${flipped ? "flipped" : ""} ${result?.perfect ? "perfect" : result ? "missed" : ""}`}>
           <div className="material-card-face">
             <span>{current.stateLabel}</span>
-            <h3>{formatFormula(current)}</h3>
+            <h3 className="formula-text">{formatFormula(current)}</h3>
             <p>{current.name}</p>
           </div>
         </div>
@@ -248,11 +248,15 @@ export default function MaterialAnalysisGame() {
         <section className="analysis-result">
           <div className="star-row">{result.stars}</div>
           <div className="field-result-row">
-            <span>分類：{result.fields.category ? "✔" : "✘"}</span>
-            <span>粒子：{result.fields.particle ? "✔" : "✘"}</span>
-            <span>鍵結：{result.fields.bond ? "✔" : "✘"}</span>
-            <span>導電：{result.fields.conductivity ? "✔" : "✘"}</span>
-            <span>性質：{result.fields.properties ? "✔" : "✘"}</span>
+            <ResultBadge label="分類" ok={result.fields.category} answer={optionLabel(data.options, "categories", current.category)} />
+            <ResultBadge label="粒子" ok={result.fields.particle} answer={optionLabel(data.options, "particles", current.particle)} />
+            <ResultBadge label="鍵結" ok={result.fields.bond} answer={optionLabel(data.options, "bonds", current.bond)} />
+            <ResultBadge label="導電" ok={result.fields.conductivity} answer={current.conductivity ? "可以" : "不可以"} />
+            <ResultBadge
+              label="性質"
+              ok={result.fields.properties}
+              answer={current.properties.map(id => optionLabel(data.options, "properties", id)).join("、")}
+            />
           </div>
           <div className="ai-feedback">
             <h3>AI 教學解析</h3>
@@ -284,5 +288,14 @@ function ChoiceGroup({ title, options, value, onPick }) {
         ))}
       </div>
     </section>
+  );
+}
+
+function ResultBadge({ label, ok, answer }) {
+  return (
+    <span className={ok ? "result-badge ok" : "result-badge wrong"}>
+      <strong>{label}：{ok ? "✔" : "✘"}</strong>
+      {!ok && <em>正解：{answer}</em>}
+    </span>
   );
 }

@@ -774,6 +774,8 @@ h1 {
 
 .material-card {
   min-height: 360px;
+  min-width: 0;
+  overflow: hidden;
   border-radius: 28px;
   border: 1px solid var(--line);
   background:
@@ -810,6 +812,7 @@ h1 {
 .material-card-face {
   text-align: center;
   padding: 26px;
+  min-width: 0;
 }
 
 .material-card-face span {
@@ -823,8 +826,14 @@ h1 {
 
 .material-card-face h3 {
   margin: 20px 0 8px;
-  font-size: clamp(46px, 8vw, 86px);
-  line-height: 1;
+  font-size: clamp(34px, 5vw, 64px);
+  line-height: 1.05;
+}
+
+.material-card-face .formula-text {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .material-card-face p {
@@ -919,12 +928,34 @@ h1 {
   gap: 10px;
 }
 
-.field-result-row span {
+.field-result-row .result-badge {
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: 18px;
   background: var(--panel);
   padding: 8px 11px;
   font-weight: 900;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+}
+
+.field-result-row .result-badge.wrong {
+  border-color: var(--red);
+  background: var(--bad-bg);
+  color: var(--red);
+}
+
+.field-result-row .result-badge.ok {
+  border-color: rgba(63, 143, 112, 0.4);
+}
+
+.field-result-row .result-badge em {
+  font-style: normal;
+  font-weight: 900;
+  color: var(--red);
+  overflow-wrap: anywhere;
 }
 
 .ai-feedback {
