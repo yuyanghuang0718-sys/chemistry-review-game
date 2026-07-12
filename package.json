@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "dev:separation": "vite separation-game --host 127.0.0.1",
+    "build:separation": "vite build separation-game --base ./ --outDir ../dist/separation-game",
+    "preview:separation": "vite preview separation-game --host 127.0.0.1"
+  },
+  "dependencies": {
+    "pdf-parse": "^2.4.5",
+    "pptxgenjs": "^4.0.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "vite": "^7.0.4"
+  }
+}
