@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "sessionLength": 10,
+  "ui": {
+    "title": "物質分析遊戲",
+    "subtitle": "從物質種類一路推到粒子、鍵結、狀態導電與物理性質。"
+  },
+  "options": {
+    "categories": [
+      { "id": "ionic", "label": "離子化合物" },
+      { "id": "molecular", "label": "分子物質" },
+      { "id": "network", "label": "網狀固體" },
+      { "id": "metal", "label": "金屬" }
+    ],
+    "particles": [
+      { "id": "ions", "label": "離子" },
+      { "id": "molecules", "label": "分子" },
+      { "id": "atoms", "label": "原子" },
+      { "id": "metal_atoms", "label": "金屬原子" }
+    ],
+    "bonds": [
+      { "id": "ionic", "label": "離子鍵" },
+      { "id": "covalent", "label": "共價鍵" },
+      { "id": "metallic", "label": "金屬鍵" }
+    ],
+    "properties": [
+      { "id": "high_mp", "label": "熔點、沸點高" },
+      { "id": "low_mp", "label": "熔點、沸點低" },
+      { "id": "hard", "label": "質硬" },
+      { "id": "brittle", "label": "易碎" },
+      { "id": "soft", "label": "質軟" },
+      { "id": "ductile", "label": "有延性" },
+      { "id": "malleable", "label": "有展性" },
+      { "id": "volatile", "label": "揮發性高" },
+      { "id": "solid_conductive", "label": "固態可導電" },
+      { "id": "liquid_conductive", "label": "液態可導電" },
+      { "id": "aqueous_conductive", "label": "水溶液可導電" }
+    ]
+  },
+  "stateTemplates": {
+    "ionic": {
+      "s": { "particle": "ions", "conductivity": false, "properties": ["high_mp", "hard", "brittle"], "reason": "固態離子化合物中，正負離子固定在晶格中，沒有自由移動的帶電粒子，因此不能導電。" },
+      "l": { "particle": "ions", "conductivity": true, "properties": ["high_mp", "liquid_conductive"], "reason": "熔融後離子可以自由移動，所以液態離子化合物可以導電。" },
+      "aq": { "particle": "ions", "conductivity": true, "properties": ["aqueous_conductive"], "reason": "溶於水後解離成可移動離子，因此水溶液可以導電。" }
+    },
+    "molecular": {
+      "s": { "particle": "molecules", "conductivity": false, "properties": ["low_mp"], "reason": "分子物質由中性分子組成，通常沒有自由移動的帶電粒子，因此不導電。" },
+      "l": { "particle": "molecules", "conductivity": false, "properties": ["low_mp"], "reason": "液態分子物質多由中性分子組成，沒有足夠自由離子或電子，因此通常不導電。" },
+      "g": { "particle": "molecules", "conductivity": false, "properties": ["low_mp", "volatile"], "reason": "氣態分子仍以中性分子存在，沒有自由移動的離子，因此不導電。" },
+      "aq": { "particle": "molecules", "conductivity": false, "properties": ["low_mp"], "reason": "多數分子溶於水後仍主要以分子存在，若不解離就不導電。" }
+    },
+    "network": {
+      "s": { "particle": "atoms", "conductivity": false, "properties": ["high_mp", "hard", "brittle"], "reason": "網狀固體由原子以共價鍵延伸成巨大結構，通常沒有自由移動電子，因此多數不導電。" }
+    },
+    "metal": {
+      "s": { "particle": "metal_atoms", "conductivity": true, "properties": ["high_mp", "ductile", "malleable", "solid_conductive"], "reason": "金屬具有可自由移動的電子，所以固態可以導電。" },
+      "l": { "particle": "metal_atoms", "conductivity": true, "properties": ["high_mp", "ductile", "malleable", "liquid_conductive"], "reason": "液態金屬仍有可移動電子，因此可以導電。" }
+    }
+  },
+  "substances": [
+    { "formula": "NaCl", "name": "氯化鈉", "category": "ionic", "bond": "ionic", "states": ["s", "l", "aq"], "tags": ["required", "salt"] },
+    { "formula": "KCl", "name": "氯化鉀", "category": "ionic", "bond": "ionic", "states": ["s", "l", "aq"], "tags": ["required", "salt"] },
+    { "formula": "CaCl2", "displayFormula": "CaCl₂", "name": "氯化鈣", "category": "ionic", "bond": "ionic", "states": ["s", "l", "aq"], "tags": ["required", "salt"] },
+    { "formula": "MgO", "name": "氧化鎂", "category": "ionic", "bond": "ionic", "states": ["s", "l", "aq"], "tags": ["required", "oxide"] },
+    { "formula": "CaO", "name": "氧化鈣", "category": "ionic", "bond": "ionic", "states": ["s", "l", "aq"], "tags": ["required", "oxide"] },
+    { "formula": "NaOH", "name": "氫氧化鈉", "category": "ionic", "bond": "ionic", "states": ["s", "l", "aq"], "tags": ["required", "base"] },
+    { "formula": "KOH", "name": "氫氧化鉀", "category": "ionic", "bond": "ionic", "states": ["s", "l", "aq"], "tags": ["required", "base"] },
+    { "formula": "CuSO4", "displayFormula": "CuSO₄", "name": "硫酸銅", "category": "ionic", "bond": "ionic", "states": ["s", "l", "aq"], "tags": ["required", "salt"] },
+    { "formula": "AgNO3", "displayFormula": "AgNO₃", "name": "硝酸銀", "category": "ionic", "bond": "ionic", "states": ["s", "l", "aq"], "tags": ["required", "salt"] },
+    { "formula": "Na2CO3", "displayFormula": "Na₂CO₃", "name": "碳酸鈉", "category": "ionic", "bond": "ionic", "states": ["s", "l", "aq"], "tags": ["required", "salt"] },
+    { "formula": "NaBr", "name": "溴化鈉", "category": "ionic", "bond": "ionic", "states": ["s", "l", "aq"], "tags": ["salt"] },
+    { "formula": "KI", "name": "碘化鉀", "category": "ionic", "bond": "ionic", "states": ["s", "l", "aq"], "tags": ["salt"] },
+    { "formula": "LiCl", "name": "氯化鋰", "category": "ionic", "bond": "ionic", "states": ["s", "l", "aq"], "tags": ["salt"] },
+    { "formula": "BaCl2", "displayFormula": "BaCl₂", "name": "氯化鋇", "category": "ionic", "bond": "ionic", "states": ["s", "l", "aq"], "tags": ["salt"] },
+    { "formula": "Al2O3", "displayFormula": "Al₂O₃", "name": "氧化鋁", "category": "ionic", "bond": "ionic", "states": ["s", "l", "aq"], "tags": ["oxide"] },
+    { "formula": "FeCl3", "displayFormula": "FeCl₃", "name": "氯化鐵(III)", "category": "ionic", "bond": "ionic", "states": ["s", "l", "aq"], "tags": ["salt"] },
+    { "formula": "CuCl2", "displayFormula": "CuCl₂", "name": "氯化銅(II)", "category": "ionic", "bond": "ionic", "states": ["s", "l", "aq"], "tags": ["salt"] },
+    { "formula": "ZnSO4", "displayFormula": "ZnSO₄", "name": "硫酸鋅", "category": "ionic", "bond": "ionic", "states": ["s", "l", "aq"], "tags": ["salt"] },
+    { "formula": "NaNO3", "displayFormula": "NaNO₃", "name": "硝酸鈉", "category": "ionic", "bond": "ionic", "states": ["s", "l", "aq"], "tags": ["salt"] },
+    { "formula": "KNO3", "displayFormula": "KNO₃", "name": "硝酸鉀", "category": "ionic", "bond": "ionic", "states": ["s", "l", "aq"], "tags": ["salt"] },
+    { "formula": "CaCO3", "displayFormula": "CaCO₃", "name": "碳酸鈣", "category": "ionic", "bond": "ionic", "states": ["s", "l", "aq"], "tags": ["salt"] },
+    { "formula": "NH4Cl", "displayFormula": "NH₄Cl", "name": "氯化銨", "category": "ionic", "bond": "ionic", "states": ["s", "l", "aq"], "tags": ["salt"] },
+    { "formula": "MgCl2", "displayFormula": "MgCl₂", "name": "氯化鎂", "category": "ionic", "bond": "ionic", "states": ["s", "l", "aq"], "tags": ["salt"] },
+    { "formula": "Na2SO4", "displayFormula": "Na₂SO₄", "name": "硫酸鈉", "category": "ionic", "bond": "ionic", "states": ["s", "l", "aq"], "tags": ["salt"] },
+    { "formula": "K2SO4", "displayFormula": "K₂SO₄", "name": "硫酸鉀", "category": "ionic", "bond": "ionic", "states": ["s", "l", "aq"], "tags": ["salt"] },
+
+    { "formula": "H2O", "displayFormula": "H₂O", "name": "水", "category": "molecular", "bond": "covalent", "states": ["s", "l", "g", "aq"], "tags": ["required"], "stateOverrides": { "l": { "properties": ["low_mp"], "reason": "純水主要由中性水分子組成，離子很少，因此導電性很弱，課本分類通常視為不導電。" } } },
+    { "formula": "NH3", "displayFormula": "NH₃", "name": "氨", "category": "molecular", "bond": "covalent", "states": ["s", "l", "g", "aq"], "tags": ["required", "base"], "stateOverrides": { "aq": { "particle": "molecules", "conductivity": true, "properties": ["low_mp", "aqueous_conductive"], "reason": "氨水中部分 NH₃ 與水反應形成 NH₄⁺ 和 OH⁻，因此可導電但比強電解質弱。" } } },
+    { "formula": "CO2", "displayFormula": "CO₂", "name": "二氧化碳", "category": "molecular", "bond": "covalent", "states": ["s", "g", "aq"], "tags": ["required"] },
+    { "formula": "SO2", "displayFormula": "SO₂", "name": "二氧化硫", "category": "molecular", "bond": "covalent", "states": ["s", "l", "g", "aq"], "tags": ["required"] },
+    { "formula": "CH4", "displayFormula": "CH₄", "name": "甲烷", "category": "molecular", "bond": "covalent", "states": ["s", "l", "g"], "tags": ["required", "organic"] },
+    { "formula": "C2H6", "displayFormula": "C₂H₆", "name": "乙烷", "category": "molecular", "bond": "covalent", "states": ["s", "l", "g"], "tags": ["required", "organic"] },
+    { "formula": "C2H5OH", "displayFormula": "C₂H₅OH", "name": "乙醇", "category": "molecular", "bond": "covalent", "states": ["s", "l", "g", "aq"], "tags": ["required", "organic"] },
+    { "formula": "HCl", "name": "氯化氫", "category": "molecular", "bond": "covalent", "states": ["g", "aq"], "tags": ["required", "acid"], "stateOverrides": { "aq": { "particle": "ions", "conductivity": true, "properties": ["aqueous_conductive"], "reason": "HCl 溶於水後解離成 H⁺ 和 Cl⁻，有自由移動離子，因此可以導電。" } } },
+    { "formula": "HF", "name": "氟化氫", "category": "molecular", "bond": "covalent", "states": ["l", "g", "aq"], "tags": ["required", "acid"], "stateOverrides": { "aq": { "particle": "ions", "conductivity": true, "properties": ["aqueous_conductive"], "reason": "HF 溶於水後部分解離產生離子，因此水溶液可以導電。" } } },
+    { "formula": "Cl2", "displayFormula": "Cl₂", "name": "氯氣", "category": "molecular", "bond": "covalent", "states": ["l", "g", "aq"], "tags": ["required"] },
+    { "formula": "Br2", "displayFormula": "Br₂", "name": "溴", "category": "molecular", "bond": "covalent", "states": ["s", "l", "g", "aq"], "tags": ["required"] },
+    { "formula": "I2", "displayFormula": "I₂", "name": "碘", "category": "molecular", "bond": "covalent", "states": ["s", "g", "aq"], "tags": ["required"] },
+    { "formula": "O2", "displayFormula": "O₂", "name": "氧氣", "category": "molecular", "bond": "covalent", "states": ["s", "l", "g", "aq"], "tags": ["required"] },
+    { "formula": "N2", "displayFormula": "N₂", "name": "氮氣", "category": "molecular", "bond": "covalent", "states": ["s", "l", "g", "aq"], "tags": ["required"] },
+    { "formula": "H2", "displayFormula": "H₂", "name": "氫氣", "category": "molecular", "bond": "covalent", "states": ["s", "l", "g"], "tags": ["gas"] },
+    { "formula": "F2", "displayFormula": "F₂", "name": "氟氣", "category": "molecular", "bond": "covalent", "states": ["l", "g", "aq"], "tags": ["halogen"] },
+    { "formula": "O3", "displayFormula": "O₃", "name": "臭氧", "category": "molecular", "bond": "covalent", "states": ["s", "l", "g", "aq"], "tags": ["gas"] },
+    { "formula": "NO2", "displayFormula": "NO₂", "name": "二氧化氮", "category": "molecular", "bond": "covalent", "states": ["l", "g", "aq"], "tags": ["gas"] },
+    { "formula": "NO", "name": "一氧化氮", "category": "molecular", "bond": "covalent", "states": ["s", "l", "g"], "tags": ["gas"] },
+    { "formula": "CO", "name": "一氧化碳", "category": "molecular", "bond": "covalent", "states": ["s", "l", "g"], "tags": ["gas"] },
+    { "formula": "H2O2", "displayFormula": "H₂O₂", "name": "過氧化氫", "category": "molecular", "bond": "covalent", "states": ["s", "l", "aq"], "tags": ["oxidant"] },
+    { "formula": "C6H12O6", "displayFormula": "C₆H₁₂O₆", "name": "葡萄糖", "category": "molecular", "bond": "covalent", "states": ["s", "l", "aq"], "tags": ["organic"] },
+    { "formula": "C12H22O11", "displayFormula": "C₁₂H₂₂O₁₁", "name": "蔗糖", "category": "molecular", "bond": "covalent", "states": ["s", "l", "aq"], "tags": ["organic"] },
+    { "formula": "CH3OH", "displayFormula": "CH₃OH", "name": "甲醇", "category": "molecular", "bond": "covalent", "states": ["s", "l", "g", "aq"], "tags": ["organic"] },
+    { "formula": "C3H8", "displayFormula": "C₃H₈", "name": "丙烷", "category": "molecular", "bond": "covalent", "states": ["s", "l", "g"], "tags": ["organic"] },
+    { "formula": "C4H10", "displayFormula": "C₄H₁₀", "name": "丁烷", "category": "molecular", "bond": "covalent", "states": ["s", "l", "g"], "tags": ["organic"] },
+    { "formula": "C2H4", "displayFormula": "C₂H₄", "name": "乙烯", "category": "molecular", "bond": "covalent", "states": ["s", "l", "g"], "tags": ["organic"] },
+    { "formula": "C2H2", "displayFormula": "C₂H₂", "name": "乙炔", "category": "molecular", "bond": "covalent", "states": ["s", "l", "g"], "tags": ["organic"] },
+    { "formula": "CH3COOH", "displayFormula": "CH₃COOH", "name": "醋酸", "category": "molecular", "bond": "covalent", "states": ["s", "l", "g", "aq"], "tags": ["acid", "organic"], "stateOverrides": { "aq": { "particle": "ions", "conductivity": true, "properties": ["aqueous_conductive"], "reason": "醋酸是弱酸，溶於水後部分解離產生離子，因此水溶液可以導電。" } } },
+    { "formula": "H2SO4", "displayFormula": "H₂SO₄", "name": "硫酸", "category": "molecular", "bond": "covalent", "states": ["l", "aq"], "tags": ["acid"], "stateOverrides": { "aq": { "particle": "ions", "conductivity": true, "properties": ["aqueous_conductive"], "reason": "硫酸水溶液含有自由移動的離子，因此可導電。" } } },
+    { "formula": "HNO3", "displayFormula": "HNO₃", "name": "硝酸", "category": "molecular", "bond": "covalent", "states": ["l", "aq"], "tags": ["acid"], "stateOverrides": { "aq": { "particle": "ions", "conductivity": true, "properties": ["aqueous_conductive"], "reason": "硝酸溶於水後解離產生離子，因此可導電。" } } },
+
+    { "formula": "Diamond", "name": "金剛石", "category": "network", "bond": "covalent", "states": ["s"], "tags": ["required", "carbon"] },
+    { "formula": "Graphite", "name": "石墨", "category": "network", "bond": "covalent", "states": ["s"], "tags": ["required", "carbon"], "stateOverrides": { "s": { "conductivity": true, "properties": ["high_mp", "soft", "brittle", "solid_conductive"], "reason": "石墨屬於網狀固體，但層狀結構中有可自由移動的電子，所以固態可以導電。" } } },
+    { "formula": "SiO2", "displayFormula": "SiO₂", "name": "二氧化矽", "category": "network", "bond": "covalent", "states": ["s"], "tags": ["required"] },
+    { "formula": "SiC", "name": "碳化矽", "category": "network", "bond": "covalent", "states": ["s"], "tags": ["required"] },
+    { "formula": "BN", "name": "氮化硼", "category": "network", "bond": "covalent", "states": ["s"], "tags": ["required"] },
+    { "formula": "Quartz", "name": "石英", "category": "network", "bond": "covalent", "states": ["s"], "tags": ["mineral"] },
+    { "formula": "B", "name": "硼", "category": "network", "bond": "covalent", "states": ["s"], "tags": ["metalloid"] },
+    { "formula": "Si", "name": "矽", "category": "network", "bond": "covalent", "states": ["s"], "tags": ["semiconductor"] },
+    { "formula": "Ge", "name": "鍺", "category": "network", "bond": "covalent", "states": ["s"], "tags": ["semiconductor"] },
+    { "formula": "C60", "displayFormula": "C₆₀", "name": "碳60", "category": "molecular", "bond": "covalent", "states": ["s"], "tags": ["carbon"] },
+
+    { "formula": "Na", "name": "鈉", "category": "metal", "bond": "metallic", "states": ["s", "l"], "tags": ["required"] },
+    { "formula": "K", "name": "鉀", "category": "metal", "bond": "metallic", "states": ["s", "l"], "tags": ["required"] },
+    { "formula": "Mg", "name": "鎂", "category": "metal", "bond": "metallic", "states": ["s", "l"], "tags": ["required"] },
+    { "formula": "Al", "name": "鋁", "category": "metal", "bond": "metallic", "states": ["s", "l"], "tags": ["required"] },
+    { "formula": "Fe", "name": "鐵", "category": "metal", "bond": "metallic", "states": ["s", "l"], "tags": ["required"] },
+    { "formula": "Cu", "name": "銅", "category": "metal", "bond": "metallic", "states": ["s", "l"], "tags": ["required"] },
+    { "formula": "Zn", "name": "鋅", "category": "metal", "bond": "metallic", "states": ["s", "l"], "tags": ["required"] },
+    { "formula": "Ag", "name": "銀", "category": "metal", "bond": "metallic", "states": ["s", "l"], "tags": ["required"] },
+    { "formula": "Au", "name": "金", "category": "metal", "bond": "metallic", "states": ["s", "l"], "tags": ["required"] },
+    { "formula": "Li", "name": "鋰", "category": "metal", "bond": "metallic", "states": ["s", "l"], "tags": ["metal"] },
+    { "formula": "Ca", "name": "鈣", "category": "metal", "bond": "metallic", "states": ["s", "l"], "tags": ["metal"] },
+    { "formula": "Ba", "name": "鋇", "category": "metal", "bond": "metallic", "states": ["s", "l"], "tags": ["metal"] },
+    { "formula": "Ni", "name": "鎳", "category": "metal", "bond": "metallic", "states": ["s", "l"], "tags": ["metal"] },
+    { "formula": "Sn", "name": "錫", "category": "metal", "bond": "metallic", "states": ["s", "l"], "tags": ["metal"] },
+    { "formula": "Pb", "name": "鉛", "category": "metal", "bond": "metallic", "states": ["s", "l"], "tags": ["metal"] },
+    { "formula": "Hg", "name": "水銀", "category": "metal", "bond": "metallic", "states": ["l"], "tags": ["metal"] }
+  ]
+}

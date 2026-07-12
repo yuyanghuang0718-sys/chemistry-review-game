@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import MaterialAnalysisGame from "./MaterialAnalysisGame.jsx";
 
 const methods = [
   {
@@ -207,6 +208,12 @@ const gameCards = [
     title: "物質分類配對",
     kicker: "元素、化合物、混合物",
     description: "把常見物質配對到正確分類，特別練容易混淆的合金、溶液與純物質。"
+  },
+  {
+    id: "materialAnalysis",
+    title: "物質分析遊戲",
+    kicker: "物質種類、粒子、鍵結、導電與性質",
+    description: "完成整張物質資訊卡，一次批改全部內容，練習從狀態推理導電與物理性質。"
   }
 ];
 
@@ -245,12 +252,14 @@ function App() {
           <button className={page === "home" ? "active" : ""} type="button" onClick={() => setPage("home")}>遊戲選單</button>
           <button className={page === "separation" ? "active" : ""} type="button" onClick={() => setPage("separation")}>分離純化</button>
           <button className={page === "matter" ? "active" : ""} type="button" onClick={() => setPage("matter")}>物質分類</button>
+          <button className={page === "materialAnalysis" ? "active" : ""} type="button" onClick={() => setPage("materialAnalysis")}>物質分析</button>
         </GlassSurface>
       </header>
 
       {page === "home" && <HomePage onOpen={setPage} />}
       {page === "separation" && <SeparationGame />}
       {page === "matter" && <MatterMatchingGame />}
+      {page === "materialAnalysis" && <MaterialAnalysisGame />}
     </div>
   );
 }
