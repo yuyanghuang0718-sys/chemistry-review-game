@@ -1,478 +1,817 @@
 {
-  "schemaVersion": 2,
-  "sessionLength": 10,
-  "minQuestionCount": 30,
-  "requiredExamples": [
-    "NaCl-s",
-    "NaCl-l",
-    "NaCl-aq",
-    "HCl-g",
-    "HCl-aq",
-    "H2O-s",
-    "H2O-l",
-    "H2O-g",
-    "Cu-s",
-    "Graphite-s",
-    "SiO2-s"
-  ],
-  "ui": {
-    "title": "物質分析遊戲",
-    "subtitle": "題庫依高中化學講義建立，重點練物質種類、粒子、鍵結、導電與性質。"
-  },
-  "options": {
-    "categories": [
-      { "id": "ionic", "label": "離子化合物" },
-      { "id": "molecular", "label": "分子物質" },
-      { "id": "network", "label": "網狀固體" },
-      { "id": "metal", "label": "金屬" }
-    ],
-    "particles": [
-      { "id": "ions", "label": "離子" },
-      { "id": "molecules", "label": "分子" },
-      { "id": "atoms", "label": "原子" },
-      { "id": "metal_atoms", "label": "金屬原子" }
-    ],
-    "bonds": [
-      { "id": "ionic", "label": "離子鍵" },
-      { "id": "covalent", "label": "共價鍵" },
-      { "id": "metallic", "label": "金屬鍵" }
-    ],
-    "properties": [
-      { "id": "high_mp", "label": "熔點、沸點高" },
-      { "id": "low_mp", "label": "熔點、沸點低" },
-      { "id": "hard", "label": "質硬" },
-      { "id": "brittle", "label": "易碎" },
-      { "id": "soft", "label": "質軟" },
-      { "id": "ductile", "label": "有延性" },
-      { "id": "malleable", "label": "有展性" },
-      { "id": "volatile", "label": "揮發性高" },
-      { "id": "solid_conductive", "label": "固態可導電" },
-      { "id": "liquid_conductive", "label": "液態可導電" },
-      { "id": "aqueous_conductive", "label": "水溶液可導電" }
-    ]
-  },
-  "stateTemplates": {
-    "ionic": {
-      "s": { "particle": "ions", "conductivity": false, "properties": ["high_mp", "hard", "brittle"], "reason": "固態離子晶體中，正負離子固定在晶格中，沒有可自由移動的離子，因此不導電。" },
-      "l": { "particle": "ions", "conductivity": true, "properties": ["high_mp", "liquid_conductive"], "reason": "離子晶體在熔融狀態時，離子可以自由移動，因此可導電。" },
-      "aq": { "particle": "ions", "conductivity": true, "properties": ["aqueous_conductive"], "reason": "離子化合物溶於水後形成可移動離子，因此水溶液可導電。" }
-    },
-    "molecular": {
-      "s": { "particle": "molecules", "conductivity": false, "properties": ["low_mp"], "reason": "分子物質由中性分子組成，分子間作用力較弱，通常熔沸點低且不導電。" },
-      "l": { "particle": "molecules", "conductivity": false, "properties": ["low_mp"], "reason": "液態分子物質多由中性分子組成，沒有自由離子或自由電子，因此通常不導電。" },
-      "g": { "particle": "molecules", "conductivity": false, "properties": ["low_mp", "volatile"], "reason": "氣態分子仍以中性分子存在，沒有自由移動的離子，因此不導電。" },
-      "aq": { "particle": "molecules", "conductivity": false, "properties": ["low_mp"], "reason": "多數分子物質溶於水後仍以分子存在，若教材未標示會解離，就不判為可導電。" }
-    },
-    "network": {
-      "s": { "particle": "atoms", "conductivity": false, "properties": ["high_mp", "hard", "brittle"], "reason": "網狀固體由原子以共價鍵延伸成巨大結構，通常熔點高、硬，且沒有自由移動電子而不導電。" }
-    },
-    "metal": {
-      "s": { "particle": "metal_atoms", "conductivity": true, "properties": ["high_mp", "ductile", "malleable", "solid_conductive"], "reason": "金屬晶體中有可自由移動的價電子，所以固態可以導電，且具有延性與展性。" },
-      "l": { "particle": "metal_atoms", "conductivity": true, "properties": ["liquid_conductive"], "reason": "液態金屬仍具有可移動電子，因此可導電。" }
-    }
-  },
-  "substances": [
-    {
-      "id": "NaCl",
-      "formula": "NaCl",
-      "name": "氯化鈉／食鹽",
-      "category": "ionic",
-      "bond": "ionic",
-      "states": ["s", "l", "aq"],
-      "source": "講義 p.60 離子晶體性質；p.68 例題11 食鹽",
-      "tags": ["lecture", "ionic", "example"]
-    },
-    {
-      "id": "MgO",
-      "formula": "MgO",
-      "name": "氧化鎂",
-      "category": "ionic",
-      "bond": "ionic",
-      "states": ["s"],
-      "source": "講義 p.60 離子晶體熔點例：MgO 熔點 2800°C",
-      "tags": ["lecture", "ionic"]
-    },
-    {
-      "id": "CuSO4",
-      "formula": "CuSO4",
-      "displayFormula": "CuSO₄",
-      "name": "硫酸銅",
-      "category": "ionic",
-      "bond": "ionic",
-      "states": ["s", "aq"],
-      "source": "講義 p.60 離子化合物以實驗式表示例：CuSO4",
-      "tags": ["lecture", "ionic"]
-    },
-    {
-      "id": "NH4NO3",
-      "formula": "NH4NO3",
-      "displayFormula": "NH₄NO₃",
-      "name": "硝酸銨",
-      "category": "ionic",
-      "bond": "ionic",
-      "states": ["s", "aq"],
-      "source": "講義 p.68 類題7 選項：NH4NO3",
-      "tags": ["lecture", "ionic", "exercise"]
-    },
-    {
-      "id": "HCl",
-      "formula": "HCl",
-      "name": "氯化氫",
-      "category": "molecular",
-      "bond": "covalent",
-      "states": ["g", "aq"],
-      "source": "講義 p.62 分子物質溶於水導電註記；p.68 例題11 氯化氫",
-      "stateOverrides": {
-        "aq": {
-          "particle": "ions",
-          "conductivity": true,
-          "properties": ["aqueous_conductive"],
-          "reason": "HCl 是分子物質，但溶於水後解離成離子，因此水溶液可導電。",
-          "source": "講義 p.62 酸分子溶於水會解離；p.68 例題11"
-        }
-      },
-      "tags": ["lecture", "molecular", "acid"]
-    },
-    {
-      "id": "H2SO4",
-      "formula": "H2SO4",
-      "displayFormula": "H₂SO₄",
-      "name": "硫酸",
-      "category": "molecular",
-      "bond": "covalent",
-      "states": ["aq"],
-      "source": "講義 p.62 分子化合物例：H2SO4；酸溶於水導電註記",
-      "stateOverrides": {
-        "aq": {
-          "particle": "ions",
-          "conductivity": true,
-          "properties": ["aqueous_conductive"],
-          "reason": "H2SO4 屬分子化合物；依講義，酸溶於水會解離產生離子而具導電性。"
-        }
-      },
-      "tags": ["lecture", "molecular", "acid"]
-    },
-    {
-      "id": "NH3",
-      "formula": "NH3",
-      "displayFormula": "NH₃",
-      "name": "氨",
-      "category": "molecular",
-      "bond": "covalent",
-      "states": ["g", "aq"],
-      "source": "講義 p.62 分子水溶液導電註記；p.65 類題5",
-      "stateOverrides": {
-        "aq": {
-          "particle": "ions",
-          "conductivity": true,
-          "properties": ["aqueous_conductive"],
-          "reason": "NH3 為分子物質；依講義，屬於鹼的分子化合物溶於水時可產生離子而導電。"
-        }
-      },
-      "tags": ["lecture", "molecular", "base"]
-    },
-    {
-      "id": "HF",
-      "formula": "HF",
-      "name": "氟化氫",
-      "category": "molecular",
-      "bond": "covalent",
-      "states": ["aq"],
-      "source": "講義 p.62 分子化合物例：HF",
-      "stateOverrides": {
-        "aq": {
-          "particle": "ions",
-          "conductivity": true,
-          "properties": ["aqueous_conductive"],
-          "reason": "HF 屬分子化合物；作為酸溶於水時可產生離子，因此水溶液可導電。"
-        }
-      },
-      "tags": ["lecture", "molecular", "acid"]
-    },
-    {
-      "id": "H2O",
-      "formula": "H2O",
-      "displayFormula": "H₂O",
-      "name": "水",
-      "category": "molecular",
-      "bond": "covalent",
-      "states": ["s", "l", "g"],
-      "source": "講義 p.62 分子間作用力圖：H2O",
-      "tags": ["lecture", "molecular"]
-    },
-    {
-      "id": "CO2",
-      "formula": "CO2",
-      "displayFormula": "CO₂",
-      "name": "二氧化碳",
-      "category": "molecular",
-      "bond": "covalent",
-      "states": ["g"],
-      "source": "講義 p.62 分子化合物例：CO2；p.64 例題7",
-      "tags": ["lecture", "molecular"]
-    },
-    {
-      "id": "H2S",
-      "formula": "H2S",
-      "displayFormula": "H₂S",
-      "name": "硫化氫",
-      "category": "molecular",
-      "bond": "covalent",
-      "states": ["g"],
-      "source": "講義 p.65 類題5 選項：H2S",
-      "tags": ["lecture", "molecular", "exercise"]
-    },
-    {
-      "id": "CH4",
-      "formula": "CH4",
-      "displayFormula": "CH₄",
-      "name": "甲烷",
-      "category": "molecular",
-      "bond": "covalent",
-      "states": ["g"],
-      "source": "講義 p.62 例題4 路易斯結構選項：CH4",
-      "tags": ["lecture", "molecular", "exercise"]
-    },
-    {
-      "id": "C2H5OH",
-      "formula": "C2H5OH",
-      "displayFormula": "C₂H₅OH",
-      "name": "乙醇",
-      "category": "molecular",
-      "bond": "covalent",
-      "states": ["l"],
-      "source": "講義 p.62 分子與網狀固體比較圖：乙醇分子",
-      "tags": ["lecture", "molecular"]
-    },
-    {
-      "id": "C3H8",
-      "formula": "C3H8",
-      "displayFormula": "C₃H₈",
-      "name": "丙烷",
-      "category": "molecular",
-      "bond": "covalent",
-      "states": ["g"],
-      "source": "講義 p.68 類題7 選項：C3H8",
-      "tags": ["lecture", "molecular", "exercise"]
-    },
-    {
-      "id": "C60",
-      "formula": "C60",
-      "displayFormula": "C₆₀",
-      "name": "碳六十",
-      "category": "molecular",
-      "bond": "covalent",
-      "states": ["s"],
-      "source": "講義 p.68 類題7 選項：C60",
-      "tags": ["lecture", "molecular", "exercise"]
-    },
-    {
-      "id": "O3",
-      "formula": "O3",
-      "displayFormula": "O₃",
-      "name": "臭氧",
-      "category": "molecular",
-      "bond": "covalent",
-      "states": ["g"],
-      "source": "講義 p.62 元素分子例：O3",
-      "tags": ["lecture", "molecular"]
-    },
-    {
-      "id": "H2",
-      "formula": "H2",
-      "displayFormula": "H₂",
-      "name": "氫氣",
-      "category": "molecular",
-      "bond": "covalent",
-      "states": ["g"],
-      "source": "講義 p.62 元素分子例：H2",
-      "tags": ["lecture", "molecular"]
-    },
-    {
-      "id": "P4",
-      "formula": "P4",
-      "displayFormula": "P₄",
-      "name": "白磷",
-      "category": "molecular",
-      "bond": "covalent",
-      "states": ["s"],
-      "source": "講義 p.62 元素分子例：P4",
-      "tags": ["lecture", "molecular"]
-    },
-    {
-      "id": "SO2",
-      "formula": "SO2",
-      "displayFormula": "SO₂",
-      "name": "二氧化硫",
-      "category": "molecular",
-      "bond": "covalent",
-      "states": ["g"],
-      "source": "講義 p.64 例題7 選項：SO2",
-      "tags": ["lecture", "molecular", "exercise"]
-    },
-    {
-      "id": "NO2",
-      "formula": "NO2",
-      "displayFormula": "NO₂",
-      "name": "二氧化氮",
-      "category": "molecular",
-      "bond": "covalent",
-      "states": ["g"],
-      "source": "講義 p.64 八隅體規則例外：NO2",
-      "tags": ["lecture", "molecular"]
-    },
-    {
-      "id": "BF3",
-      "formula": "BF3",
-      "displayFormula": "BF₃",
-      "name": "三氟化硼",
-      "category": "molecular",
-      "bond": "covalent",
-      "states": ["g"],
-      "source": "講義 p.64 八隅體規則例外：BF3",
-      "tags": ["lecture", "molecular"]
-    },
-    {
-      "id": "Diamond",
-      "formula": "C",
-      "displayFormula": "C",
-      "name": "金剛石",
-      "category": "network",
-      "bond": "covalent",
-      "states": ["s"],
-      "source": "講義 p.66 共價網狀固體例；p.67 金剛石性質",
-      "stateOverrides": {
-        "s": {
-          "properties": ["high_mp", "hard"],
-          "reason": "金剛石中每個碳原子以共價鍵連接四個碳原子，形成三度空間網狀固體；教材標示不導電、硬度很大。"
-        }
-      },
-      "tags": ["lecture", "network"]
-    },
-    {
-      "id": "Graphite",
-      "formula": "C",
-      "displayFormula": "C",
-      "name": "石墨",
-      "category": "network",
-      "bond": "covalent",
-      "states": ["s"],
-      "source": "講義 p.67 石墨結構與導電性；p.68 例題11",
-      "stateOverrides": {
-        "s": {
-          "conductivity": true,
-          "properties": ["high_mp", "soft", "solid_conductive"],
-          "reason": "石墨屬網狀固體，但層內有可在平面移動的電子，因此固態可導電；層間作用弱，所以質軟。"
-        }
-      },
-      "tags": ["lecture", "network", "exception"]
-    },
-    {
-      "id": "SiO2",
-      "formula": "SiO2",
-      "displayFormula": "SiO₂",
-      "name": "二氧化矽／石英",
-      "category": "network",
-      "bond": "covalent",
-      "states": ["s"],
-      "source": "講義 p.66 共價網狀固體例；p.67 二氧化矽性質；p.68 類題7",
-      "stateOverrides": {
-        "s": {
-          "properties": ["high_mp", "hard", "brittle"],
-          "reason": "二氧化矽為三度空間網狀固體，教材標示硬度大、耐高溫且具有電絕緣性。"
-        }
-      },
-      "tags": ["lecture", "network"]
-    },
-    {
-      "id": "Si",
-      "formula": "Si",
-      "name": "矽",
-      "category": "network",
-      "bond": "covalent",
-      "states": ["s"],
-      "source": "講義 p.66 共價網狀固體例：矽",
-      "tags": ["lecture", "network"]
-    },
-    {
-      "id": "SiC",
-      "formula": "SiC",
-      "name": "碳化矽",
-      "category": "network",
-      "bond": "covalent",
-      "states": ["s"],
-      "source": "講義 p.66 共價網狀固體例：碳化矽",
-      "tags": ["lecture", "network"]
-    },
-    {
-      "id": "BN",
-      "formula": "BN",
-      "name": "氮化硼",
-      "category": "network",
-      "bond": "covalent",
-      "states": ["s"],
-      "source": "講義 p.66 共價網狀固體例：氮化硼",
-      "tags": ["lecture", "network"]
-    },
-    {
-      "id": "Fe",
-      "formula": "Fe",
-      "name": "鐵",
-      "category": "metal",
-      "bond": "metallic",
-      "states": ["s"],
-      "source": "講義 p.65 金屬晶體以實驗式表示例：Fe",
-      "tags": ["lecture", "metal"]
-    },
-    {
-      "id": "Cu",
-      "formula": "Cu",
-      "name": "銅",
-      "category": "metal",
-      "bond": "metallic",
-      "states": ["s"],
-      "source": "講義 p.65 金屬晶體以實驗式表示例：Cu",
-      "tags": ["lecture", "metal"]
-    },
-    {
-      "id": "Al",
-      "formula": "Al",
-      "name": "鋁",
-      "category": "metal",
-      "bond": "metallic",
-      "states": ["s"],
-      "source": "講義 p.68 例題11 物質比較：鋁",
-      "tags": ["lecture", "metal", "example"]
-    },
-    {
-      "id": "Ag",
-      "formula": "Ag",
-      "name": "銀",
-      "category": "metal",
-      "bond": "metallic",
-      "states": ["s"],
-      "source": "講義 p.68 類題8：銀白色光澤固體，具導電性",
-      "tags": ["lecture", "metal", "exercise"]
-    },
-    {
-      "id": "Hg",
-      "formula": "Hg",
-      "name": "汞",
-      "category": "metal",
-      "bond": "metallic",
-      "states": ["l"],
-      "source": "講義 p.65 金屬晶體性質：常溫下除汞外多為固體",
-      "tags": ["lecture", "metal"]
-    },
-    {
-      "id": "W",
-      "formula": "W",
-      "name": "鎢",
-      "category": "metal",
-      "bond": "metallic",
-      "states": ["s"],
-      "source": "講義 p.65 金屬熔點例：鎢 3422°C",
-      "tags": ["lecture", "metal"]
-    }
-  ]
+    "schemaVersion":  2,
+    "sessionLength":  10,
+    "minQuestionCount":  30,
+    "requiredExamples":  [
+                             "NaCl-s",
+                             "NaCl-l",
+                             "NaCl-aq",
+                             "HCl-g",
+                             "HCl-aq",
+                             "H2O-s",
+                             "H2O-l",
+                             "H2O-g",
+                             "Cu-s",
+                             "Graphite-s",
+                             "SiO2-s"
+                         ],
+    "ui":  {
+               "title":  "物質分析遊戲",
+               "subtitle":  "題庫依高中化學講義建立，重點練物質種類、粒子、鍵結、導電與性質。"
+           },
+    "options":  {
+                    "categories":  [
+                                       {
+                                           "id":  "ionic",
+                                           "label":  "離子化合物"
+                                       },
+                                       {
+                                           "id":  "molecular",
+                                           "label":  "分子物質"
+                                       },
+                                       {
+                                           "id":  "network",
+                                           "label":  "網狀固體"
+                                       },
+                                       {
+                                           "id":  "metal",
+                                           "label":  "金屬"
+                                       }
+                                   ],
+                    "particles":  [
+                                      {
+                                          "id":  "ions",
+                                          "label":  "離子"
+                                      },
+                                      {
+                                          "id":  "molecules",
+                                          "label":  "分子"
+                                      },
+                                      {
+                                          "id":  "atoms",
+                                          "label":  "原子"
+                                      },
+                                      {
+                                          "id":  "metal_atoms",
+                                          "label":  "金屬原子"
+                                      }
+                                  ],
+                    "bonds":  [
+                                  {
+                                      "id":  "ionic",
+                                      "label":  "離子鍵"
+                                  },
+                                  {
+                                      "id":  "covalent",
+                                      "label":  "共價鍵"
+                                  },
+                                  {
+                                      "id":  "metallic",
+                                      "label":  "金屬鍵"
+                                  }
+                              ],
+                    "properties":  [
+                                       {
+                                           "id":  "high_mp",
+                                           "label":  "熔點、沸點高"
+                                       },
+                                       {
+                                           "id":  "low_mp",
+                                           "label":  "熔點、沸點低"
+                                       },
+                                       {
+                                           "id":  "hard",
+                                           "label":  "質硬"
+                                       },
+                                       {
+                                           "id":  "brittle",
+                                           "label":  "易碎"
+                                       },
+                                       {
+                                           "id":  "soft",
+                                           "label":  "質軟"
+                                       },
+                                       {
+                                           "id":  "ductile",
+                                           "label":  "有延性"
+                                       },
+                                       {
+                                           "id":  "malleable",
+                                           "label":  "有展性"
+                                       },
+                                       {
+                                           "id":  "volatile",
+                                           "label":  "揮發性高"
+                                       }
+                                   ]
+                },
+    "stateTemplates":  {
+                           "ionic":  {
+                                         "s":  {
+                                                   "particle":  "ions",
+                                                   "conductivity":  false,
+                                                   "properties":  [
+                                                                      "high_mp",
+                                                                      "hard",
+                                                                      "brittle"
+                                                                  ],
+                                                   "reason":  "固態離子晶體中，正負離子固定在晶格中，沒有可自由移動的離子，因此不導電。"
+                                               },
+                                         "l":  {
+                                                   "particle":  "ions",
+                                                   "conductivity":  true,
+                                                   "properties":  [
+                                                                      "high_mp"
+                                                                  ],
+                                                   "reason":  "離子晶體在熔融狀態時，離子可以自由移動，因此可導電。"
+                                               },
+                                         "aq":  {
+                                                    "particle":  "ions",
+                                                    "conductivity":  true,
+                                                    "properties":  [
+                                                                       "high_mp",
+                                                                       "hard",
+                                                                       "brittle"
+                                                                   ],
+                                                    "reason":  "離子化合物溶於水後形成可移動離子，因此水溶液可導電。"
+                                                }
+                                     },
+                           "molecular":  {
+                                             "s":  {
+                                                       "particle":  "molecules",
+                                                       "conductivity":  false,
+                                                       "properties":  [
+                                                                          "low_mp"
+                                                                      ],
+                                                       "reason":  "分子物質由中性分子組成，分子間作用力較弱，通常熔沸點低且不導電。"
+                                                   },
+                                             "l":  {
+                                                       "particle":  "molecules",
+                                                       "conductivity":  false,
+                                                       "properties":  [
+                                                                          "low_mp"
+                                                                      ],
+                                                       "reason":  "液態分子物質多由中性分子組成，沒有自由離子或自由電子，因此通常不導電。"
+                                                   },
+                                             "g":  {
+                                                       "particle":  "molecules",
+                                                       "conductivity":  false,
+                                                       "properties":  [
+                                                                          "low_mp",
+                                                                          "volatile"
+                                                                      ],
+                                                       "reason":  "氣態分子仍以中性分子存在，沒有自由移動的離子，因此不導電。"
+                                                   },
+                                             "aq":  {
+                                                        "particle":  "molecules",
+                                                        "conductivity":  false,
+                                                        "properties":  [
+                                                                           "low_mp"
+                                                                       ],
+                                                        "reason":  "多數分子物質溶於水後仍以分子存在，若教材未標示會解離，就不判為可導電。"
+                                                    }
+                                         },
+                           "network":  {
+                                           "s":  {
+                                                     "particle":  "atoms",
+                                                     "conductivity":  false,
+                                                     "properties":  [
+                                                                        "high_mp",
+                                                                        "hard",
+                                                                        "brittle"
+                                                                    ],
+                                                     "reason":  "網狀固體由原子以共價鍵延伸成巨大結構，通常熔點高、硬，且沒有自由移動電子而不導電。"
+                                                 }
+                                       },
+                           "metal":  {
+                                         "s":  {
+                                                   "particle":  "metal_atoms",
+                                                   "conductivity":  true,
+                                                   "properties":  [
+                                                                      "high_mp",
+                                                                      "ductile",
+                                                                      "malleable"
+                                                                  ],
+                                                   "reason":  "金屬晶體中有可自由移動的價電子，所以固態可以導電，且具有延性與展性。"
+                                               },
+                                         "l":  {
+                                                   "particle":  "metal_atoms",
+                                                   "conductivity":  true,
+                                                   "properties":  [
+                                                                      "ductile",
+                                                                      "malleable"
+                                                                  ],
+                                                   "reason":  "液態金屬仍具有可移動電子，因此可導電。"
+                                               }
+                                     }
+                       },
+    "substances":  [
+                       {
+                           "id":  "NaCl",
+                           "formula":  "NaCl",
+                           "name":  "氯化鈉／食鹽",
+                           "category":  "ionic",
+                           "bond":  "ionic",
+                           "states":  [
+                                          "s",
+                                          "l",
+                                          "aq"
+                                      ],
+                           "source":  "講義 p.60 離子晶體性質；p.68 例題11 食鹽",
+                           "tags":  [
+                                        "lecture",
+                                        "ionic",
+                                        "example"
+                                    ]
+                       },
+                       {
+                           "id":  "MgO",
+                           "formula":  "MgO",
+                           "name":  "氧化鎂",
+                           "category":  "ionic",
+                           "bond":  "ionic",
+                           "states":  [
+                                          "s"
+                                      ],
+                           "source":  "講義 p.60 離子晶體熔點例：MgO 熔點 2800°C",
+                           "tags":  [
+                                        "lecture",
+                                        "ionic"
+                                    ]
+                       },
+                       {
+                           "id":  "CuSO4",
+                           "formula":  "CuSO4",
+                           "displayFormula":  "CuSO₄",
+                           "name":  "硫酸銅",
+                           "category":  "ionic",
+                           "bond":  "ionic",
+                           "states":  [
+                                          "s",
+                                          "aq"
+                                      ],
+                           "source":  "講義 p.60 離子化合物以實驗式表示例：CuSO4",
+                           "tags":  [
+                                        "lecture",
+                                        "ionic"
+                                    ]
+                       },
+                       {
+                           "id":  "NH4NO3",
+                           "formula":  "NH4NO3",
+                           "displayFormula":  "NH₄NO₃",
+                           "name":  "硝酸銨",
+                           "category":  "ionic",
+                           "bond":  "ionic",
+                           "states":  [
+                                          "s",
+                                          "aq"
+                                      ],
+                           "source":  "講義 p.68 類題7 選項：NH4NO3",
+                           "tags":  [
+                                        "lecture",
+                                        "ionic",
+                                        "exercise"
+                                    ]
+                       },
+                       {
+                           "id":  "HCl",
+                           "formula":  "HCl",
+                           "name":  "氯化氫",
+                           "category":  "molecular",
+                           "bond":  "covalent",
+                           "states":  [
+                                          "g",
+                                          "aq"
+                                      ],
+                           "source":  "講義 p.62 分子物質溶於水導電註記；p.68 例題11 氯化氫",
+                           "stateOverrides":  {
+                                                  "aq":  {
+                                                             "particle":  "ions",
+                                                             "conductivity":  true,
+                                                             "properties":  [
+                                                                                "low_mp"
+                                                                            ],
+                                                             "reason":  "HCl 是分子物質，但溶於水後解離成離子，因此水溶液可導電。",
+                                                             "source":  "講義 p.62 酸分子溶於水會解離；p.68 例題11"
+                                                         }
+                                              },
+                           "tags":  [
+                                        "lecture",
+                                        "molecular",
+                                        "acid"
+                                    ]
+                       },
+                       {
+                           "id":  "H2SO4",
+                           "formula":  "H2SO4",
+                           "displayFormula":  "H₂SO₄",
+                           "name":  "硫酸",
+                           "category":  "molecular",
+                           "bond":  "covalent",
+                           "states":  [
+                                          "aq"
+                                      ],
+                           "source":  "講義 p.62 分子化合物例：H2SO4；酸溶於水導電註記",
+                           "stateOverrides":  {
+                                                  "aq":  {
+                                                             "particle":  "ions",
+                                                             "conductivity":  true,
+                                                             "properties":  [
+                                                                                "low_mp"
+                                                                            ],
+                                                             "reason":  "H2SO4 屬分子化合物；依講義，酸溶於水會解離產生離子而具導電性。"
+                                                         }
+                                              },
+                           "tags":  [
+                                        "lecture",
+                                        "molecular",
+                                        "acid"
+                                    ]
+                       },
+                       {
+                           "id":  "NH3",
+                           "formula":  "NH3",
+                           "displayFormula":  "NH₃",
+                           "name":  "氨",
+                           "category":  "molecular",
+                           "bond":  "covalent",
+                           "states":  [
+                                          "g",
+                                          "aq"
+                                      ],
+                           "source":  "講義 p.62 分子水溶液導電註記；p.65 類題5",
+                           "stateOverrides":  {
+                                                  "aq":  {
+                                                             "particle":  "ions",
+                                                             "conductivity":  true,
+                                                             "properties":  [
+                                                                                "low_mp"
+                                                                            ],
+                                                             "reason":  "NH3 為分子物質；依講義，屬於鹼的分子化合物溶於水時可產生離子而導電。"
+                                                         }
+                                              },
+                           "tags":  [
+                                        "lecture",
+                                        "molecular",
+                                        "base"
+                                    ]
+                       },
+                       {
+                           "id":  "HF",
+                           "formula":  "HF",
+                           "name":  "氟化氫",
+                           "category":  "molecular",
+                           "bond":  "covalent",
+                           "states":  [
+                                          "aq"
+                                      ],
+                           "source":  "講義 p.62 分子化合物例：HF",
+                           "stateOverrides":  {
+                                                  "aq":  {
+                                                             "particle":  "ions",
+                                                             "conductivity":  true,
+                                                             "properties":  [
+                                                                                "low_mp"
+                                                                            ],
+                                                             "reason":  "HF 屬分子化合物；作為酸溶於水時可產生離子，因此水溶液可導電。"
+                                                         }
+                                              },
+                           "tags":  [
+                                        "lecture",
+                                        "molecular",
+                                        "acid"
+                                    ]
+                       },
+                       {
+                           "id":  "H2O",
+                           "formula":  "H2O",
+                           "displayFormula":  "H₂O",
+                           "name":  "水",
+                           "category":  "molecular",
+                           "bond":  "covalent",
+                           "states":  [
+                                          "s",
+                                          "l",
+                                          "g"
+                                      ],
+                           "source":  "講義 p.62 分子間作用力圖：H2O",
+                           "tags":  [
+                                        "lecture",
+                                        "molecular"
+                                    ]
+                       },
+                       {
+                           "id":  "CO2",
+                           "formula":  "CO2",
+                           "displayFormula":  "CO₂",
+                           "name":  "二氧化碳",
+                           "category":  "molecular",
+                           "bond":  "covalent",
+                           "states":  [
+                                          "g"
+                                      ],
+                           "source":  "講義 p.62 分子化合物例：CO2；p.64 例題7",
+                           "tags":  [
+                                        "lecture",
+                                        "molecular"
+                                    ]
+                       },
+                       {
+                           "id":  "H2S",
+                           "formula":  "H2S",
+                           "displayFormula":  "H₂S",
+                           "name":  "硫化氫",
+                           "category":  "molecular",
+                           "bond":  "covalent",
+                           "states":  [
+                                          "g"
+                                      ],
+                           "source":  "講義 p.65 類題5 選項：H2S",
+                           "tags":  [
+                                        "lecture",
+                                        "molecular",
+                                        "exercise"
+                                    ]
+                       },
+                       {
+                           "id":  "CH4",
+                           "formula":  "CH4",
+                           "displayFormula":  "CH₄",
+                           "name":  "甲烷",
+                           "category":  "molecular",
+                           "bond":  "covalent",
+                           "states":  [
+                                          "g"
+                                      ],
+                           "source":  "講義 p.62 例題4 路易斯結構選項：CH4",
+                           "tags":  [
+                                        "lecture",
+                                        "molecular",
+                                        "exercise"
+                                    ]
+                       },
+                       {
+                           "id":  "C2H5OH",
+                           "formula":  "C2H5OH",
+                           "displayFormula":  "C₂H₅OH",
+                           "name":  "乙醇",
+                           "category":  "molecular",
+                           "bond":  "covalent",
+                           "states":  [
+                                          "l"
+                                      ],
+                           "source":  "講義 p.62 分子與網狀固體比較圖：乙醇分子",
+                           "tags":  [
+                                        "lecture",
+                                        "molecular"
+                                    ]
+                       },
+                       {
+                           "id":  "C3H8",
+                           "formula":  "C3H8",
+                           "displayFormula":  "C₃H₈",
+                           "name":  "丙烷",
+                           "category":  "molecular",
+                           "bond":  "covalent",
+                           "states":  [
+                                          "g"
+                                      ],
+                           "source":  "講義 p.68 類題7 選項：C3H8",
+                           "tags":  [
+                                        "lecture",
+                                        "molecular",
+                                        "exercise"
+                                    ]
+                       },
+                       {
+                           "id":  "C60",
+                           "formula":  "C60",
+                           "displayFormula":  "C₆₀",
+                           "name":  "碳六十",
+                           "category":  "molecular",
+                           "bond":  "covalent",
+                           "states":  [
+                                          "s"
+                                      ],
+                           "source":  "講義 p.68 類題7 選項：C60",
+                           "tags":  [
+                                        "lecture",
+                                        "molecular",
+                                        "exercise"
+                                    ]
+                       },
+                       {
+                           "id":  "O3",
+                           "formula":  "O3",
+                           "displayFormula":  "O₃",
+                           "name":  "臭氧",
+                           "category":  "molecular",
+                           "bond":  "covalent",
+                           "states":  [
+                                          "g"
+                                      ],
+                           "source":  "講義 p.62 元素分子例：O3",
+                           "tags":  [
+                                        "lecture",
+                                        "molecular"
+                                    ]
+                       },
+                       {
+                           "id":  "H2",
+                           "formula":  "H2",
+                           "displayFormula":  "H₂",
+                           "name":  "氫氣",
+                           "category":  "molecular",
+                           "bond":  "covalent",
+                           "states":  [
+                                          "g"
+                                      ],
+                           "source":  "講義 p.62 元素分子例：H2",
+                           "tags":  [
+                                        "lecture",
+                                        "molecular"
+                                    ]
+                       },
+                       {
+                           "id":  "P4",
+                           "formula":  "P4",
+                           "displayFormula":  "P₄",
+                           "name":  "白磷",
+                           "category":  "molecular",
+                           "bond":  "covalent",
+                           "states":  [
+                                          "s"
+                                      ],
+                           "source":  "講義 p.62 元素分子例：P4",
+                           "tags":  [
+                                        "lecture",
+                                        "molecular"
+                                    ]
+                       },
+                       {
+                           "id":  "SO2",
+                           "formula":  "SO2",
+                           "displayFormula":  "SO₂",
+                           "name":  "二氧化硫",
+                           "category":  "molecular",
+                           "bond":  "covalent",
+                           "states":  [
+                                          "g"
+                                      ],
+                           "source":  "講義 p.64 例題7 選項：SO2",
+                           "tags":  [
+                                        "lecture",
+                                        "molecular",
+                                        "exercise"
+                                    ]
+                       },
+                       {
+                           "id":  "NO2",
+                           "formula":  "NO2",
+                           "displayFormula":  "NO₂",
+                           "name":  "二氧化氮",
+                           "category":  "molecular",
+                           "bond":  "covalent",
+                           "states":  [
+                                          "g"
+                                      ],
+                           "source":  "講義 p.64 八隅體規則例外：NO2",
+                           "tags":  [
+                                        "lecture",
+                                        "molecular"
+                                    ]
+                       },
+                       {
+                           "id":  "BF3",
+                           "formula":  "BF3",
+                           "displayFormula":  "BF₃",
+                           "name":  "三氟化硼",
+                           "category":  "molecular",
+                           "bond":  "covalent",
+                           "states":  [
+                                          "g"
+                                      ],
+                           "source":  "講義 p.64 八隅體規則例外：BF3",
+                           "tags":  [
+                                        "lecture",
+                                        "molecular"
+                                    ]
+                       },
+                       {
+                           "id":  "Diamond",
+                           "formula":  "C",
+                           "displayFormula":  "C",
+                           "name":  "金剛石",
+                           "category":  "network",
+                           "bond":  "covalent",
+                           "states":  [
+                                          "s"
+                                      ],
+                           "source":  "講義 p.66 共價網狀固體例；p.67 金剛石性質",
+                           "stateOverrides":  {
+                                                  "s":  {
+                                                            "properties":  [
+                                                                               "high_mp",
+                                                                               "hard"
+                                                                           ],
+                                                            "reason":  "金剛石中每個碳原子以共價鍵連接四個碳原子，形成三度空間網狀固體；教材標示不導電、硬度很大。"
+                                                        }
+                                              },
+                           "tags":  [
+                                        "lecture",
+                                        "network"
+                                    ]
+                       },
+                       {
+                           "id":  "Graphite",
+                           "formula":  "C",
+                           "displayFormula":  "C",
+                           "name":  "石墨",
+                           "category":  "network",
+                           "bond":  "covalent",
+                           "states":  [
+                                          "s"
+                                      ],
+                           "source":  "講義 p.67 石墨結構與導電性；p.68 例題11",
+                           "stateOverrides":  {
+                                                  "s":  {
+                                                            "conductivity":  true,
+                                                            "properties":  [
+                                                                               "high_mp",
+                                                                               "soft"
+                                                                           ],
+                                                            "reason":  "石墨屬網狀固體，但層內有可在平面移動的電子，因此固態可導電；層間作用弱，所以質軟。"
+                                                        }
+                                              },
+                           "tags":  [
+                                        "lecture",
+                                        "network",
+                                        "exception"
+                                    ]
+                       },
+                       {
+                           "id":  "SiO2",
+                           "formula":  "SiO2",
+                           "displayFormula":  "SiO₂",
+                           "name":  "二氧化矽／石英",
+                           "category":  "network",
+                           "bond":  "covalent",
+                           "states":  [
+                                          "s"
+                                      ],
+                           "source":  "講義 p.66 共價網狀固體例；p.67 二氧化矽性質；p.68 類題7",
+                           "stateOverrides":  {
+                                                  "s":  {
+                                                            "properties":  [
+                                                                               "high_mp",
+                                                                               "hard",
+                                                                               "brittle"
+                                                                           ],
+                                                            "reason":  "二氧化矽為三度空間網狀固體，教材標示硬度大、耐高溫且具有電絕緣性。"
+                                                        }
+                                              },
+                           "tags":  [
+                                        "lecture",
+                                        "network"
+                                    ]
+                       },
+                       {
+                           "id":  "Si",
+                           "formula":  "Si",
+                           "name":  "矽",
+                           "category":  "network",
+                           "bond":  "covalent",
+                           "states":  [
+                                          "s"
+                                      ],
+                           "source":  "講義 p.66 共價網狀固體例：矽",
+                           "tags":  [
+                                        "lecture",
+                                        "network"
+                                    ]
+                       },
+                       {
+                           "id":  "SiC",
+                           "formula":  "SiC",
+                           "name":  "碳化矽",
+                           "category":  "network",
+                           "bond":  "covalent",
+                           "states":  [
+                                          "s"
+                                      ],
+                           "source":  "講義 p.66 共價網狀固體例：碳化矽",
+                           "tags":  [
+                                        "lecture",
+                                        "network"
+                                    ]
+                       },
+                       {
+                           "id":  "BN",
+                           "formula":  "BN",
+                           "name":  "氮化硼",
+                           "category":  "network",
+                           "bond":  "covalent",
+                           "states":  [
+                                          "s"
+                                      ],
+                           "source":  "講義 p.66 共價網狀固體例：氮化硼",
+                           "tags":  [
+                                        "lecture",
+                                        "network"
+                                    ]
+                       },
+                       {
+                           "id":  "Fe",
+                           "formula":  "Fe",
+                           "name":  "鐵",
+                           "category":  "metal",
+                           "bond":  "metallic",
+                           "states":  [
+                                          "s"
+                                      ],
+                           "source":  "講義 p.65 金屬晶體以實驗式表示例：Fe",
+                           "tags":  [
+                                        "lecture",
+                                        "metal"
+                                    ]
+                       },
+                       {
+                           "id":  "Cu",
+                           "formula":  "Cu",
+                           "name":  "銅",
+                           "category":  "metal",
+                           "bond":  "metallic",
+                           "states":  [
+                                          "s"
+                                      ],
+                           "source":  "講義 p.65 金屬晶體以實驗式表示例：Cu",
+                           "tags":  [
+                                        "lecture",
+                                        "metal"
+                                    ]
+                       },
+                       {
+                           "id":  "Al",
+                           "formula":  "Al",
+                           "name":  "鋁",
+                           "category":  "metal",
+                           "bond":  "metallic",
+                           "states":  [
+                                          "s"
+                                      ],
+                           "source":  "講義 p.68 例題11 物質比較：鋁",
+                           "tags":  [
+                                        "lecture",
+                                        "metal",
+                                        "example"
+                                    ]
+                       },
+                       {
+                           "id":  "Ag",
+                           "formula":  "Ag",
+                           "name":  "銀",
+                           "category":  "metal",
+                           "bond":  "metallic",
+                           "states":  [
+                                          "s"
+                                      ],
+                           "source":  "講義 p.68 類題8：銀白色光澤固體，具導電性",
+                           "tags":  [
+                                        "lecture",
+                                        "metal",
+                                        "exercise"
+                                    ]
+                       },
+                       {
+                           "id":  "Hg",
+                           "formula":  "Hg",
+                           "name":  "汞",
+                           "category":  "metal",
+                           "bond":  "metallic",
+                           "states":  [
+                                          "l"
+                                      ],
+                           "source":  "講義 p.65 金屬晶體性質：常溫下除汞外多為固體",
+                           "tags":  [
+                                        "lecture",
+                                        "metal"
+                                    ]
+                       },
+                       {
+                           "id":  "W",
+                           "formula":  "W",
+                           "name":  "鎢",
+                           "category":  "metal",
+                           "bond":  "metallic",
+                           "states":  [
+                                          "s"
+                                      ],
+                           "source":  "講義 p.65 金屬熔點例：鎢 3422°C",
+                           "tags":  [
+                                        "lecture",
+                                        "metal"
+                                    ]
+                       }
+                   ]
 }

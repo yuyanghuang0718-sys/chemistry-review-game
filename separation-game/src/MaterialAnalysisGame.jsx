@@ -11,7 +11,6 @@ import {
 
 const emptyAnswer = {
   category: "",
-  particle: "",
   bond: "",
   conductivity: null,
   properties: []
@@ -56,7 +55,7 @@ export default function MaterialAnalysisGame() {
   const [flipped, setFlipped] = useState(false);
 
   useEffect(() => {
-    const materialsUrl = `${import.meta.env.BASE_URL}data/materials.json?v=lecture-v2`;
+    const materialsUrl = `${import.meta.env.BASE_URL}data/materials.json?v=lecture-v3`;
     fetch(materialsUrl, { cache: "no-store" })
       .then(response => {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -77,7 +76,7 @@ export default function MaterialAnalysisGame() {
   const completed = session.finished;
   const elapsedSeconds = Math.max(1, Math.round((Date.now() - session.startedAt) / 1000));
   const level = Math.floor(session.xp / 100) + 1;
-  const required = current && answer.category && answer.particle && answer.bond && answer.conductivity !== null && answer.properties.length > 0;
+  const required = current && answer.category && answer.bond && answer.conductivity !== null && answer.properties.length > 0;
   const explanations = useMemo(() => {
     if (!result || !current || !data) return [];
     return buildMaterialExplanations(current, answer, result, data.options);
@@ -118,7 +117,7 @@ export default function MaterialAnalysisGame() {
   function nextCard() {
     if (index + 1 >= deck.length) {
       const finalScore = session.score;
-      const accuracy = Math.round((finalScore / (deck.length * 5)) * 100);
+      const accuracy = Math.round((finalScore / (deck.length * 4)) * 100);
       const finalRecord = {
         accuracy,
         xp: session.xp,
@@ -213,16 +212,15 @@ export default function MaterialAnalysisGame() {
 
         <form className="analysis-board">
           <ChoiceGroup title="① 物質分類" options={data.options.categories} value={answer.category} onPick={value => setField("category", value)} />
-          <ChoiceGroup title="② 組成粒子" options={data.options.particles} value={answer.particle} onPick={value => setField("particle", value)} />
-          <ChoiceGroup title="③ 化學鍵" options={data.options.bonds} value={answer.bond} onPick={value => setField("bond", value)} />
+          <ChoiceGroup title="② 化學鍵" options={data.options.bonds} value={answer.bond} onPick={value => setField("bond", value)} />
           <ChoiceGroup
-            title="④ 此狀態是否導電？"
+            title="③ 此狀態是否導電？"
             options={[{ id: true, label: "可以" }, { id: false, label: "不可以" }]}
             value={answer.conductivity}
             onPick={value => setField("conductivity", value)}
           />
           <section className="analysis-section wide">
-            <h3>⑤ 最符合的性質（可複選）</h3>
+            <h3>④ 最符合的物理性質（可複選）</h3>
             <div className="chip-grid">
               {data.options.properties.map(option => (
                 <button
@@ -250,7 +248,6 @@ export default function MaterialAnalysisGame() {
           <div className="star-row">{result.stars}</div>
           <div className="field-result-row">
             <ResultBadge label="分類" ok={result.fields.category} answer={optionLabel(data.options, "categories", current.category)} />
-            <ResultBadge label="粒子" ok={result.fields.particle} answer={optionLabel(data.options, "particles", current.particle)} />
             <ResultBadge label="鍵結" ok={result.fields.bond} answer={optionLabel(data.options, "bonds", current.bond)} />
             <ResultBadge label="導電" ok={result.fields.conductivity} answer={current.conductivity ? "可以" : "不可以"} />
             <ResultBadge
@@ -263,7 +260,7 @@ export default function MaterialAnalysisGame() {
             <h3>AI 教學解析</h3>
             {explanations.map(text => <p key={text}>{text}</p>)}
             <p className="truth-line">
-              正解：{optionLabel(data.options, "categories", current.category)} / {optionLabel(data.options, "particles", current.particle)} / {optionLabel(data.options, "bonds", current.bond)} / {current.conductivity ? "可導電" : "不可導電"}
+              正解：{optionLabel(data.options, "categories", current.category)} / {optionLabel(data.options, "bonds", current.bond)} / {current.conductivity ? "可導電" : "不可導電"}
             </p>
           </div>
         </section>

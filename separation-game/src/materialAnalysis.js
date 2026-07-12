@@ -58,7 +58,6 @@ export function evaluateMaterialAnswer(question, answer) {
 
   const fields = {
     category: answer.category === question.category,
-    particle: answer.particle === question.particle,
     bond: answer.bond === question.bond,
     conductivity: answer.conductivity === question.conductivity,
     properties: propertiesCorrect
@@ -67,8 +66,8 @@ export function evaluateMaterialAnswer(question, answer) {
   return {
     fields,
     correctCount,
-    perfect: correctCount === 5,
-    stars: "★★★★★".slice(0, correctCount) + "☆☆☆☆☆".slice(0, 5 - correctCount)
+    perfect: correctCount === 4,
+    stars: "★★★★".slice(0, correctCount) + "☆☆☆☆".slice(0, 4 - correctCount)
   };
 }
 
@@ -76,9 +75,6 @@ export function buildMaterialExplanations(question, answer, result, options) {
   const explanations = [];
   if (!result.fields.category) {
     explanations.push(`分類：${formatFormula(question)} 的物質分類是「${optionLabel(options, "categories", question.category)}」，不是「${optionLabel(options, "categories", answer.category)}」。分類看物質本身主要組成。`);
-  }
-  if (!result.fields.particle) {
-    explanations.push(`粒子：此狀態的主要粒子是「${optionLabel(options, "particles", question.particle)}」。像 HCl(aq) 這類水溶液要看是否解離成離子。`);
   }
   if (!result.fields.bond) {
     explanations.push(`鍵結：${question.name} 的主要鍵結是「${optionLabel(options, "bonds", question.bond)}」。鍵結判斷看物質內部作用，不只看當下狀態。`);
