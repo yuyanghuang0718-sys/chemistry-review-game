@@ -29,7 +29,7 @@ export function expandMaterialQuestions(data) {
       if (!base) continue;
       const override = substance.stateOverrides?.[state] || {};
       questions.push({
-        id: `${substance.formula}-${state}`,
+        id: `${substance.id || substance.formula}-${state}`,
         formula: substance.formula,
         displayFormula: substance.displayFormula,
         name: substance.name,
@@ -41,6 +41,7 @@ export function expandMaterialQuestions(data) {
         conductivity: override.conductivity ?? base.conductivity,
         properties: override.properties || base.properties || [],
         reason: override.reason || base.reason,
+        source: override.source || substance.source,
         tags: substance.tags || []
       });
     }
@@ -97,11 +98,12 @@ export function buildMaterialExplanations(question, answer, result, options) {
 
 export function validateMaterialData(data) {
   const questions = expandMaterialQuestions(data);
-  const required = ["NaCl-s", "NaCl-l", "NaCl-aq", "H2O-s", "H2O-l", "H2O-g", "HCl-g", "HCl-aq", "Cu-s", "Cu-l", "Graphite-s", "SiO2-s"];
+  const required = data.requiredExamples || ["NaCl-s", "NaCl-l", "NaCl-aq", "H2O-s", "H2O-l", "H2O-g", "HCl-g", "HCl-aq", "Cu-s", "Graphite-s", "SiO2-s"];
+  const minQuestionCount = data.minQuestionCount || 1;
   const ids = new Set(questions.map(item => item.id));
   return {
     count: questions.length,
-    valid: questions.length >= 200 && required.every(id => ids.has(id)),
+    valid: questions.length >= minQuestionCount && required.every(id => ids.has(id)),
     missing: required.filter(id => !ids.has(id))
   };
 }
