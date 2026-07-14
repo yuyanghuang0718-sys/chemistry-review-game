@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import MaterialAnalysisGame from "./MaterialAnalysisGame.jsx";
+import SolutionPreparationGame from "./SolutionPreparationGame.jsx";
 
 const methods = [
   {
@@ -214,6 +215,12 @@ const gameCards = [
     title: "物質分析遊戲",
     kicker: "物質種類、粒子、鍵結、導電與性質",
     description: "完成整張物質資訊卡，一次批改全部內容，練習從狀態推理導電與物理性質。"
+  },
+  {
+    id: "solutionPreparation",
+    title: "溶液調配實驗室",
+    kicker: "固體配製、原液稀釋、器材與步驟",
+    description: "計算實際用量、選擇器材並排列操作流程，完成一整張溶液調配實驗單。"
   }
 ];
 
@@ -253,6 +260,7 @@ function App() {
           <button className={page === "separation" ? "active" : ""} type="button" onClick={() => setPage("separation")}>分離純化</button>
           <button className={page === "matter" ? "active" : ""} type="button" onClick={() => setPage("matter")}>物質分類</button>
           <button className={page === "materialAnalysis" ? "active" : ""} type="button" onClick={() => setPage("materialAnalysis")}>物質分析</button>
+          <button className={page === "solutionPreparation" ? "active" : ""} type="button" onClick={() => setPage("solutionPreparation")}>溶液調配</button>
         </GlassSurface>
       </header>
 
@@ -260,6 +268,7 @@ function App() {
       {page === "separation" && <SeparationGame />}
       {page === "matter" && <MatterMatchingGame />}
       {page === "materialAnalysis" && <MaterialAnalysisGame />}
+      {page === "solutionPreparation" && <SolutionPreparationGame />}
     </div>
   );
 }

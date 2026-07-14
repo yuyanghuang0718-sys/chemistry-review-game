@@ -1,0 +1,180 @@
+{
+  "schemaVersion": 1,
+  "title": "溶液調配實驗室",
+  "sessionLength": 10,
+  "source": "高中化學講義第 117–121 頁",
+  "equipment": [
+    { "id": "balance", "label": "電子天平" },
+    { "id": "weighing-paper", "label": "稱量紙" },
+    { "id": "beaker", "label": "燒杯" },
+    { "id": "glass-rod", "label": "玻璃棒" },
+    { "id": "funnel", "label": "漏斗" },
+    { "id": "volumetric-flask", "label": "容量瓶" },
+    { "id": "wash-bottle", "label": "洗瓶" },
+    { "id": "dropper", "label": "滴管" },
+    { "id": "volumetric-pipette", "label": "移液管" },
+    { "id": "graduated-cylinder", "label": "量筒" },
+    { "id": "erlenmeyer-flask", "label": "錐形瓶" },
+    { "id": "test-tube", "label": "試管" }
+  ],
+  "taskTypes": {
+    "solid": {
+      "label": "固體配製",
+      "equipment": ["balance", "weighing-paper", "beaker", "glass-rod", "funnel", "volumetric-flask", "wash-bottle", "dropper"],
+      "steps": [
+        { "id": "calculate-weigh", "label": "計算所需質量，使用天平稱量溶質" },
+        { "id": "partial-dissolve", "label": "放入燒杯，加入少量蒸餾水並攪拌至完全溶解" },
+        { "id": "transfer", "label": "經漏斗將溶液定量轉移至容量瓶" },
+        { "id": "rinse", "label": "用蒸餾水洗滌燒杯、玻璃棒與漏斗，洗液一併轉入" },
+        { "id": "near-mark", "label": "加蒸餾水至接近容量瓶刻度線" },
+        { "id": "to-mark", "label": "改用滴管加水，使液面最低點與刻度線相切" },
+        { "id": "mix", "label": "塞緊瓶塞，上下倒轉使溶液均勻" }
+      ]
+    },
+    "dilution": {
+      "label": "原液稀釋",
+      "equipment": ["volumetric-pipette", "volumetric-flask", "wash-bottle", "dropper"],
+      "steps": [
+        { "id": "rinse-pipette", "label": "以少量原液潤洗移液管" },
+        { "id": "measure-stock", "label": "準確量取計算所得的原液體積" },
+        { "id": "transfer-stock", "label": "將原液轉移至容量瓶" },
+        { "id": "near-mark", "label": "加入蒸餾水至接近刻度線" },
+        { "id": "to-mark", "label": "用滴管加水，使液面最低點與刻度線相切" },
+        { "id": "mix", "label": "塞緊瓶塞，上下倒轉使溶液均勻" }
+      ]
+    },
+    "volumeDilution": {
+      "label": "體積百分濃度調配",
+      "equipment": ["graduated-cylinder", "volumetric-flask", "wash-bottle", "dropper"],
+      "steps": [
+        { "id": "measure-stock", "label": "用量筒量取計算所得的濃酒精體積" },
+        { "id": "transfer-stock", "label": "將濃酒精轉移至容量瓶" },
+        { "id": "near-mark", "label": "加入蒸餾水至接近刻度線" },
+        { "id": "to-mark", "label": "用滴管加水至容量瓶刻度線" },
+        { "id": "mix", "label": "塞緊瓶塞，上下倒轉使溶液均勻" }
+      ]
+    }
+  },
+  "templates": [
+    {
+      "id": "solid-nacl-example",
+      "type": "solid",
+      "formula": "NaCl",
+      "name": "氯化鈉",
+      "molarMass": 58.5,
+      "source": "講義第 119 頁：配製 100 mL、1.0 M NaCl 溶液",
+      "variants": [
+        { "molarity": 1.0, "volumeMl": 100 },
+        { "molarity": 0.5, "volumeMl": 200 }
+      ]
+    },
+    {
+      "id": "solid-nacl-practice",
+      "type": "solid",
+      "formula": "NaCl",
+      "name": "氯化鈉",
+      "molarMass": 58.5,
+      "source": "講義第 119 頁配製步驟類題",
+      "variants": [
+        { "molarity": 0.2, "volumeMl": 250 },
+        { "molarity": 0.1, "volumeMl": 500 }
+      ]
+    },
+    {
+      "id": "solid-naoh-example",
+      "type": "solid",
+      "formula": "NaOH",
+      "name": "氫氧化鈉",
+      "molarMass": 40,
+      "source": "講義濃度與配製類題：NaOH 式量 40",
+      "variants": [
+        { "molarity": 0.5, "volumeMl": 100 },
+        { "molarity": 0.2, "volumeMl": 250 }
+      ]
+    },
+    {
+      "id": "solid-glucose-example",
+      "type": "solid",
+      "formula": "C6H12O6",
+      "name": "葡萄糖",
+      "molarMass": 180,
+      "source": "講義第 117 頁：葡萄糖水溶液莫耳濃度例題",
+      "variants": [
+        { "molarity": 0.2, "volumeMl": 500 },
+        { "molarity": 0.1, "volumeMl": 250 }
+      ]
+    },
+    {
+      "id": "solid-glucose-practice",
+      "type": "solid",
+      "formula": "C6H12O6",
+      "name": "葡萄糖",
+      "molarMass": 180,
+      "source": "講義第 117 頁葡萄糖濃度類題",
+      "variants": [
+        { "molarity": 0.05, "volumeMl": 200 },
+        { "molarity": 0.25, "volumeMl": 100 }
+      ]
+    },
+    {
+      "id": "dilution-hcl-example",
+      "type": "dilution",
+      "formula": "HCl(aq)",
+      "name": "鹽酸",
+      "unit": "M",
+      "source": "講義第 121 頁：鹽酸濃度與稀釋類題",
+      "variants": [
+        { "stockConcentration": 1.0, "targetConcentration": 0.2, "finalVolumeMl": 200 },
+        { "stockConcentration": 0.5, "targetConcentration": 0.1, "finalVolumeMl": 250 }
+      ]
+    },
+    {
+      "id": "dilution-hcl-practice",
+      "type": "dilution",
+      "formula": "HCl(aq)",
+      "name": "鹽酸",
+      "unit": "M",
+      "source": "講義第 121 頁稀釋關係類題",
+      "variants": [
+        { "stockConcentration": 2.0, "targetConcentration": 0.4, "finalVolumeMl": 100 },
+        { "stockConcentration": 0.8, "targetConcentration": 0.2, "finalVolumeMl": 200 }
+      ]
+    },
+    {
+      "id": "dilution-nacl-example",
+      "type": "dilution",
+      "formula": "NaCl(aq)",
+      "name": "氯化鈉水溶液",
+      "unit": "M",
+      "source": "講義第 120 頁：由 1.0 M NaCl 配製 0.25 M NaCl",
+      "variants": [
+        { "stockConcentration": 1.0, "targetConcentration": 0.25, "finalVolumeMl": 100 },
+        { "stockConcentration": 0.5, "targetConcentration": 0.1, "finalVolumeMl": 200 }
+      ]
+    },
+    {
+      "id": "dilution-ethanol-example",
+      "type": "volumeDilution",
+      "formula": "C2H5OH(aq)",
+      "name": "酒精水溶液",
+      "unit": "%",
+      "source": "講義第 120 頁：以 90% 酒精配製 30% 酒精",
+      "variants": [
+        { "stockConcentration": 90, "targetConcentration": 30, "finalVolumeMl": 100 },
+        { "stockConcentration": 75, "targetConcentration": 25, "finalVolumeMl": 300 }
+      ]
+    },
+    {
+      "id": "dilution-ethanol-practice",
+      "type": "volumeDilution",
+      "formula": "C2H5OH(aq)",
+      "name": "酒精水溶液",
+      "unit": "%",
+      "source": "講義第 120 頁酒精調配類題",
+      "variants": [
+        { "stockConcentration": 80, "targetConcentration": 20, "finalVolumeMl": 200 },
+        { "stockConcentration": 60, "targetConcentration": 15, "finalVolumeMl": 400 }
+      ]
+    }
+  ]
+}
